@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: 
+  name: dsapp
+spec:
+  selector:
+    matchLabels:
+      app: ds-nginx
+      
+  # Declare for pods
+  template: 
+    metadata:
+      labels:
+        app: ds-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "128Mi"
+          ports: 
+          - containerPort: 80

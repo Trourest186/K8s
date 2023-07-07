@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployapp
+spec:
+  selector:
+    matchLabels:
+      app: deployapp
+  template:
+    metadata:
+      labels:
+        app: deployapp
+    spec:
+      containers:
+      - name: node
+        image: ichte/swarmtest:node
+        resources:
+          limits:
+            memory: "120Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 8085
+
+
+  cascade: delete

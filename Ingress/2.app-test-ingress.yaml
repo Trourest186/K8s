@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata: 
+  name: app
+  namespace: haproxy-controller
+spec:
+  rules:
+  - host: worker1.xtl
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: http-test-svc
+          servicePort: 8085

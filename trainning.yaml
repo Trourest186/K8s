@@ -1,0 +1,27 @@
+# Tạo một pod có name là nginxapp, nhãn app = nginxapp, chạy từ images: nginx:1.17.6, chạy từ cổng 80 của container
+
+# Sử dụng một voloume tên là: "myvol", từ đường dẫn trên node là: /home/html, 
+# mount vào thư mục container là: /usr/share/nginx/html
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginxapp
+  labels:
+    app: nginxapp
+spec:
+  volumes:
+  - name: myvol
+    hostPath: "/home/html"
+  containers:
+  - name: test
+    image: nginx:1.17.6
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "120Mi"
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - mountPath: "/usr/share/nginx/html"
+      name: myvol
+  

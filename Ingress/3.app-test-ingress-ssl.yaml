@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app
+  namespace: haproxy-controller
+spec:
+  tls:
+  - hosts:
+    - worker1.xtl
+    secretName: worker1-xtl
+  rules:
+  - host: worker1-xtl
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: http-test-svc
+            ports:  
+              number: 80
